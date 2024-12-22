@@ -135,3 +135,67 @@ body {
     padding: 0;
     color: #24292e;
 }
+
+.comment-form {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e1e4e8;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0366d6;
+    color: white;
+    cursor: pointer;
+}
+
+.form-buttons button:hover {
+    background-color: #0255b3;
+}
+
+#preview-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#toml-output {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 10px;
+}

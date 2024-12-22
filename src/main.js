@@ -109,4 +109,64 @@ async function loadData() {
     }
 }
 
-window.onload = loadData;
+function generateTomlSnippet(author, avatar, text) {
+    return `[[comments]]
+author = "${author}"
+${avatar ? `avatar = "${avatar}"` : '# avatar = "https://your-avatar-url.com/image.jpg"'}
+text = """
+${text}
+"""`;
+}
+
+function previewComment(author, avatar, text) {
+    const preview = document.getElementById('comment-preview');
+    preview.innerHTML = `
+        <div class="comment">
+            <div class="comment-header">
+                <img class="comment-avatar" src="${avatar || 'https://secure.gravatar.com/avatar/default?s=164&d=identicon'}" alt="${author}'s avatar">
+                <strong class="comment-author">${author}</strong>
+            </div>
+            <div class="comment-content">
+                <div class="comment-text">${marked(text, { breaks: true })}</div>
+            </div>
+        </div>
+    `;
+}
+
+function setupCommentForm() {
+    const form = document.getElementById('comment-form');
+    const previewBtn = document.getElementById('preview-btn');
+    const generateBtn = document.getElementById('generate-btn');
+    const previewContainer = document.getElementById('preview-container');
+    const tomlOutput = document.getElementById('toml-output');
+
+    previewBtn.addEventListener('click', () => {
+        const author = document.getElementById('author').value;
+        const avatar = document.getElementById('avatar').value;
+        const text = document.getElementById('comment-text').value;
+
+        if (author && text) {
+            previewComment(author, avatar, text);
+            previewContainer.classList.remove('hidden');
+            tomlOutput.classList.add('hidden');
+        }
+    });
+
+    generateBtn.addEventListener('click', () => {
+        const author = document.getElementById('author').value;
+        const avatar = document.getElementById('avatar').value;
+        const text = document.getElementById('comment-text').value;
+
+        if (author && text) {
+            const toml = generateTomlSnippet(author, avatar, text);
+            tomlOutput.textContent = toml;
+            tomlOutput.classList.remove('hidden');
+            previewContainer.classList.add('hidden');
+        }
+    });
+}
+
+window.onload = () => {
+    loadData();
+    setupCommentForm();
+};
