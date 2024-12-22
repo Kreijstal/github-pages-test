@@ -1,15 +1,34 @@
+async function fetchWithFallback(url) {
+    const corsProxies = [
+        'https://api.cors.lol/?url=',
+        'https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl='
+    ];
+    
+    // Shuffle the array of proxies
+    const shuffledProxies = [...corsProxies].sort(() => Math.random() - 0.5);
+    
+    let lastError;
+    for (const proxy of shuffledProxies) {
+        try {
+            const response = await fetch(proxy + encodeURIComponent(url));
+            if (response.ok) {
+                return response;
+            }
+        } catch (error) {
+            lastError = error;
+            console.warn(`Proxy ${proxy} failed:`, error);
+            continue;
+        }
+    }
+    throw new Error(`All proxies failed. Last error: ${lastError}`);
+}
+
 async function loadData() {
     try {
-        // Get data using CORS proxy
         const baseUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
-        const corsProxyUrl = 'https://api.cors.lol/?url=';
-        const zipUrl = corsProxyUrl + encodeURIComponent(baseUrl);
         
-        // Download and process zip
-        const zipResponse = await fetch(zipUrl);
-        if (!zipResponse.ok) {
-            throw new Error(`HTTP error! status: ${zipResponse.status}`);
-        }
+        // Try fetching with fallback proxies
+        const zipResponse = await fetchWithFallback(baseUrl);
         const zipBlob = await zipResponse.blob();
         
         const zip = new JSZip();
