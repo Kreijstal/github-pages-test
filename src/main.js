@@ -15,6 +15,10 @@ async function fetchWithFallback(url) {
                     "X-Requested-With": "XMLHttpRequest"
                 }
             });
+        },
+        // AllOrigins proxy
+        async (url) => {
+            return fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
         }
     ];
     
