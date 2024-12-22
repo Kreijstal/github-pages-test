@@ -8,3 +8,28 @@ This is a *markdown* formatted comment with:
 - **Bold text**
 - And more...
 """
+
+[[comments]]
+author = "Jane Doe"
+text = """
+# Project Updates
+
+Here's what I've been working on:
+1. Improved documentation
+2. Added new features
+3. Fixed bugs
+
+> This is looking great!
+"""
+
+[[comments]]
+author = "John Smith"
+text = """
+## Technical Notes
+
+```javascript
+const hello = 'world';
+```
+
+*This is how we can include code blocks in comments!*
+"""
