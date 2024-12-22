@@ -1,0 +1,10 @@
+[[comments]]
+author = "Author"
+text = """
+# Hello World!
+
+This is a *markdown* formatted comment with:
+- Bullet points
+- **Bold text**
+- And more...
+"""

@@ -10,6 +10,8 @@
     "build": "mkdir -p dist && cp -r src/* dist/"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.1",
+    "@iarna/toml": "^2.2.5",
+    "marked": "^11.1.0"
   }
 }

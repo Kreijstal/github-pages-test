@@ -95,7 +95,8 @@ async function loadData() {
         const commentsContainer = document.getElementById('comments-container');
         commentsContainer.innerHTML = comments.comments.map(comment => `
             <div class="comment">
-                <strong>${comment.author}:</strong> ${comment.text}
+                <strong>${comment.author}:</strong>
+                <div class="comment-text">${comment.text}</div>
             </div>
         `).join('');
     } catch (error) {
