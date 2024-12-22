@@ -52,7 +52,17 @@ jobs:
           # Create new release
           gh release create latest-data data.zip \
             --title "Latest Data Release" \
-            --notes "This release contains generated sample data.\n\nAll assets from this release can be accessed from:\nhttps://github.com/Kreijstal/github-pages-test/releases/download/latest-data/*\n\nFor example, the data.zip file is available at:\nhttps://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip" \
+            --notes '# Latest Data Release
+
+This release contains generated sample data.
+
+## Access Information
+
+All assets from this release can be accessed from:
+https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/*
+
+For example, the data.zip file is available at:
+https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip' \
             --latest
 
       - name: Setup Pages
