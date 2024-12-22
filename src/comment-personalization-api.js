@@ -45,4 +45,8 @@ export class CommentPersonalizationAPI {
     getContributionSteps() {
         return this.options.contributionSteps;
     }
+
+    getEditUrl() {
+        return this.options.editUrl || '';
+    }
 }

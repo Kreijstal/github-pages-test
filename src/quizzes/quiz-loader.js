@@ -60,7 +60,8 @@ async function startQuiz(quizId) {
         subheaderText: "Let us know your thoughts in the comments below!",
         formTitle: "Share Your Quiz Experience",
         previewTitle: "Preview Your Comment",
-        contributionText: "Want to help improve this quiz? You can contribute by:"
+        contributionText: "Want to help improve this quiz? You can contribute by:",
+        editUrl: `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`
     });
     
     await loadComments(`${quizId}/comments.toml`, quizPersonalization);
