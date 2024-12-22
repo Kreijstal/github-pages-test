@@ -1,5 +1,5 @@
 import { marked } from 'https://esm.sh/marked@11.2.0';
-import TOML from 'https://esm.sh/@iarna/toml@7.2.0';
+import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
 
 // Import all available quizzes
 import ArithmeticQuiz from './arithmetic/quiz.js';
