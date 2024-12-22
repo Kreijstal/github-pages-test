@@ -31,6 +31,10 @@ async function fetchWithFallback(url) {
                     'Content-Type': response.headers.get('Content-Type') || 'application/octet-stream'
                 })
             });
+        },
+        // CrossOrigin.me proxy
+        async (url) => {
+            return fetch(`https://crossorigin.me/${url}`);
         }
     ];
     
