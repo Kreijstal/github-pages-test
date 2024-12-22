@@ -52,7 +52,7 @@ export function getCommentsTemplate(personalization = new CommentPersonalization
                 <ol>
                     ${personalization.getContributionSteps().map((step, index) => 
                         index === 0 
-                            ? `<li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file</li>`
+                            ? `<li>Editing the <a href="https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${window.location.hash.slice(1)}/comments.toml" target="_blank" id="edit-comments-link">comments.toml</a> file</li>`
                             : `<li>${step}</li>`
                     ).join('\n                    ')}
                 </ol>
