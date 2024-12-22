@@ -1,6 +1,6 @@
 import { marked } from 'https://esm.sh/marked@11.2.0';
 import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
-import { PersonalizationAPI } from './comment-personalization-api.js';
+import { CommentPersonalizationAPI } from './comment-personalization-api.js';
 
 export function generateTomlSnippet(author, avatar, text) {
     return `[[comments]]
@@ -11,7 +11,7 @@ ${text}
 """`;
 }
 
-export function getCommentsTemplate(personalization = new PersonalizationAPI()) {
+export function getCommentsTemplate(personalization = new CommentPersonalizationAPI()) {
     return `
             <h2 id="comments-header">${personalization.getHeaderText()}</h2>
             <p id="comments-subheader">${personalization.getSubheaderText()}</p>
