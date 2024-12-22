@@ -61,38 +61,8 @@ async function startQuiz(quizId) {
     await loadComments(`${quizId}/comments.toml`, quizPersonalization);
     await setupCommentForm();
     
-    function setupQuestion() {
-        feedbackContainer.classList.add('hidden');
-        nextButton.classList.add('hidden');
-        quiz.display(container);
-        
-        const checkButton = container.querySelector('#check-answer');
-        checkButton.onclick = () => {
-            const isCorrect = quiz.evaluate();
-            feedbackContainer.classList.remove('hidden');
-            
-            if (isCorrect) {
-                feedbackContainer.innerHTML = '<div class="correct">Correct!</div>';
-                if (quiz.moveToNextQuestion()) {
-                    nextButton.classList.remove('hidden');
-                } else {
-                    feedbackContainer.innerHTML += '<p class="quiz-complete">Congratulations! You\'ve completed the quiz!</p>';
-                }
-            } else {
-                quiz.showAnswer(feedbackContainer);
-                // Add retry button alongside next button
-                feedbackContainer.innerHTML += `
-                    <button onclick="setupQuestion()" class="retry-button">Try Again</button>
-                `;
-                if (quiz.moveToNextQuestion()) {
-                    nextButton.classList.remove('hidden');
-                }
-            }
-        };
-    }
-    
-    nextButton.onclick = setupQuestion;
-    setupQuestion(); // Show first question
+    // Initial quiz display
+    quiz.display(container);
 }
 
 window.startQuiz = startQuiz;

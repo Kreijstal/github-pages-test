@@ -41,51 +41,72 @@ export default class TriviaQuiz {
     }
 
     display(container) {
-        const question = this.questions[this.currentQuestionIndex];
+        const feedbackContainer = document.getElementById('quiz-feedback');
+        const nextButton = document.getElementById('next-question');
         
-        container.innerHTML = `
-            <div class="quiz-question">
-                <h3>${question.text}</h3>
-                <div class="choices">
-                    ${question.choices.map((choice, index) => `
-                        <div class="choice">
-                            <input type="radio" name="answer" value="${index}" id="choice${index}">
-                            <label for="choice${index}">${choice}</label>
-                        </div>
-                    `).join('')}
+        const showQuestion = () => {
+            feedbackContainer.classList.add('hidden');
+            nextButton.classList.add('hidden');
+            
+            const question = this.questions[this.currentQuestionIndex];
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>${question.text}</h3>
+                    <div class="choices">
+                        ${question.choices.map((choice, index) => `
+                            <div class="choice">
+                                <input type="radio" name="answer" value="${index}" id="choice${index}">
+                                <label for="choice${index}">${choice}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button id="check-answer">Check Answer</button>
                 </div>
-                <button id="check-answer">Check Answer</button>
-            </div>
-        `;
-    }
+            `;
 
-    evaluate() {
-        const selectedInput = document.querySelector('input[name="answer"]:checked');
-        if (!selectedInput) return false;
-        
-        const userAnswer = parseInt(selectedInput.value);
-        return userAnswer === this.questions[this.currentQuestionIndex].correctIndex;
-    }
+            const checkButton = container.querySelector('#check-answer');
+            checkButton.onclick = () => {
+                const selectedInput = document.querySelector('input[name="answer"]:checked');
+                if (!selectedInput) return;
+                
+                const userAnswer = parseInt(selectedInput.value);
+                const isCorrect = userAnswer === question.correctIndex;
+                
+                feedbackContainer.classList.remove('hidden');
+                
+                if (isCorrect) {
+                    feedbackContainer.innerHTML = '<div class="correct">Correct!</div>';
+                    if (this.currentQuestionIndex < this.questions.length - 1) {
+                        nextButton.classList.remove('hidden');
+                    } else {
+                        feedbackContainer.innerHTML += '<p class="quiz-complete">Congratulations! You\'ve completed the quiz!</p>';
+                    }
+                } else {
+                    feedbackContainer.innerHTML = `
+                        <div class="answer-explanation">
+                            <p>The correct answer is: ${question.choices[question.correctIndex]}</p>
+                            <p>${question.explanation}</p>
+                        </div>
+                        <button class="retry-button">Try Again</button>
+                    `;
+                    
+                    const retryButton = feedbackContainer.querySelector('.retry-button');
+                    retryButton.onclick = showQuestion;
+                    
+                    if (this.currentQuestionIndex < this.questions.length - 1) {
+                        nextButton.classList.remove('hidden');
+                    }
+                }
+            };
+        };
 
-    showAnswer(container) {
-        const question = this.questions[this.currentQuestionIndex];
-        container.innerHTML = `
-            <div class="answer-explanation">
-                <p>The correct answer is: ${question.choices[question.correctIndex]}</p>
-                <p>${question.explanation}</p>
-                ${this.currentQuestionIndex === this.questions.length - 1 ? 
-                    '<p class="quiz-complete">Congratulations! You\'ve completed the quiz!</p>' : 
-                    ''}
-            </div>
-        `;
-    }
+        nextButton.onclick = () => {
+            if (this.currentQuestionIndex < this.questions.length - 1) {
+                this.currentQuestionIndex++;
+                showQuestion();
+            }
+        };
 
-    moveToNextQuestion() {
-        // Move to next question if not at the end
-        if (this.currentQuestionIndex < this.questions.length - 1) {
-            this.currentQuestionIndex++;
-            return true;
-        }
-        return false;
+        showQuestion();
     }
 }
