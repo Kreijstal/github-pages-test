@@ -1,39 +1,36 @@
 async function fetchWithFallback(url) {
-    const proxyConfigs = [
-        {
-            url: 'https://api.cors.lol/?url=',
-            transform: (url) => `https://api.cors.lol/?url=${encodeURIComponent(url)}`,
-            options: {}
+    const proxyHandlers = [
+        // Simple URL encoding proxy
+        async (url) => {
+            return fetch(`https://api.cors.lol/?url=${encodeURIComponent(url)}`);
         },
-        {
-            url: 'https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl=',
-            transform: (url) => `https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`,
-            options: {}
+        // Another URL encoding proxy
+        async (url) => {
+            return fetch(`https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`);
         },
-        {
-            url: 'https://cors-proxy.fringe.zone/',
-            transform: (url) => `https://cors-proxy.fringe.zone/${url}`,
-            options: {
+        // Proxy requiring custom headers
+        async (url) => {
+            return fetch(`https://cors-proxy.fringe.zone/${url}`, {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
-            }
+            });
         }
     ];
     
-    // Shuffle the array of proxies
-    const shuffledProxies = [...proxyConfigs].sort(() => Math.random() - 0.5);
+    // Shuffle the handlers
+    const shuffledHandlers = [...proxyHandlers].sort(() => Math.random() - 0.5);
     
     let lastError;
-    for (const proxy of shuffledProxies) {
+    for (const handler of shuffledHandlers) {
         try {
-            const response = await fetch(proxy.transform(url), proxy.options);
+            const response = await handler(url);
             if (response.ok) {
                 return response;
             }
         } catch (error) {
             lastError = error;
-            console.warn(`Proxy ${proxy.url} failed:`, error);
+            console.warn('Proxy handler failed:', error);
             continue;
         }
     }
