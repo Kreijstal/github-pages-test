@@ -50,11 +50,15 @@ async function startQuiz(quizId) {
     }
     
     // Load comments and setup form
-    await loadComments(
-        `${quizId}/comments.toml`,
-        "How was this quiz?",
-        "Let us know your thoughts in the comments below!"
-    );
+    const quizPersonalization = new PersonalizationAPI({
+        headerText: "How was this quiz?",
+        subheaderText: "Let us know your thoughts in the comments below!",
+        formTitle: "Share Your Quiz Experience",
+        previewTitle: "Preview Your Comment",
+        contributionText: "Want to help improve this quiz? You can contribute by:"
+    });
+    
+    await loadComments(`${quizId}/comments.toml`, quizPersonalization);
     await setupCommentForm();
     
     function setupQuestion() {

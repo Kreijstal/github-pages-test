@@ -1,5 +1,6 @@
 import { marked } from 'https://esm.sh/marked@11.2.0';
 import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
+import { PersonalizationAPI } from './personalization-api.js';
 
 export function generateTomlSnippet(author, avatar, text) {
     return `[[comments]]
@@ -10,13 +11,13 @@ ${text}
 """`;
 }
 
-export function getCommentsTemplate() {
+export function getCommentsTemplate(personalization = new PersonalizationAPI()) {
     return `
-            <h2 id="comments-header"></h2>
-            <p id="comments-subheader"></p>
+            <h2 id="comments-header">${personalization.getHeaderText()}</h2>
+            <p id="comments-subheader">${personalization.getSubheaderText()}</p>
             
             <div class="comment-form">
-                <h3>Create Your Comment</h3>
+                <h3>${personalization.getFormTitle()}</h3>
                 <form id="comment-form">
                     <div class="form-group">
                         <label for="author">Author Name:</label>
@@ -38,16 +39,18 @@ export function getCommentsTemplate() {
             </div>
 
             <div id="preview-container" class="hidden">
-                <h3>Preview</h3>
+                <h3>${personalization.getPreviewTitle()}</h3>
                 <div id="comment-preview"></div>
             </div>
 
             <div class="contribute-info hidden">
-                <p>Want to add your own comment? You can contribute by:</p>
+                <p>${personalization.getContributionText()}</p>
                 <ol>
-                    <li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file</li>
-                    <li>Adding your comment using TOML format with markdown support</li>
-                    <li>Creating a pull request</li>
+                    ${personalization.getContributionSteps().map((step, index) => 
+                        index === 0 
+                            ? `<li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file</li>`
+                            : `<li>${step}</li>`
+                    ).join('\n                    ')}
                 </ol>
                 <pre id="toml-output"></pre>
             </div>
