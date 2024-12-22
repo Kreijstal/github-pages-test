@@ -53,19 +53,19 @@ jobs:
           gh release create latest-data data.zip \
             --title "Latest Data Release" \
             --notes "$(cat << 'EOF'
-# Latest Data Release
+          # Latest Data Release  
 
-This release contains generated sample data.
+          This release contains generated sample data.
 
-## Access Information
+          ## Access Information
 
-All assets from this release can be accessed from:
-https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/*
+          All assets from this release can be accessed from:
+          https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/*
 
-For example, the data.zip file is available at:
-https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip
-EOF
-)" \
+          For example, the data.zip file is available at:
+          https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip
+          EOF
+          )" \
             --latest
 
       - name: Setup Pages
