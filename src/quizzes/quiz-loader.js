@@ -22,7 +22,7 @@ function loadQuizList() {
         element.innerHTML = `
             <h2>${quiz.name}</h2>
             <p>${quiz.description}</p>
-            <a onclick="startQuiz('${id}'); return false;" class="button">Start Quiz</a>
+            <button onclick="startQuiz('${id}')" class="button">Start Quiz</button>
         `;
         container.appendChild(element);
     });
@@ -43,8 +43,7 @@ async function startQuiz(quizId) {
     feedbackContainer.classList.add('hidden');
     nextButton.classList.add('hidden');
     
-    // Hide quiz list and show quiz container and comments section
-    document.getElementById('quiz-list').classList.add('hidden');
+    // Show quiz container and comments section
     document.getElementById('quiz-container').classList.remove('hidden');
     
     // Initialize comments section
