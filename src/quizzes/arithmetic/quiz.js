@@ -30,6 +30,9 @@ export default class ArithmeticQuiz {
         const feedbackContainer = document.getElementById('quiz-feedback');
         const nextButton = document.getElementById('next-question');
 
+        // Reset next button handler
+        nextButton.onclick = () => this.display(container);
+
         checkButton.onclick = () => {
             const input = document.getElementById('answer-input');
             const userAnswer = parseInt(input.value);
