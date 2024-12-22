@@ -25,6 +25,31 @@ export default class ArithmeticQuiz {
                 <button id="check-answer">Check Answer</button>
             </div>
         `;
+
+        const checkButton = container.querySelector('#check-answer');
+        const feedbackContainer = document.getElementById('quiz-feedback');
+        const nextButton = document.getElementById('next-question');
+
+        checkButton.onclick = () => {
+            const input = document.getElementById('answer-input');
+            const userAnswer = parseInt(input.value);
+            const isCorrect = userAnswer === this.currentQuestion.answer;
+            
+            feedbackContainer.classList.remove('hidden');
+            
+            if (isCorrect) {
+                feedbackContainer.innerHTML = '<div class="correct">Correct!</div>';
+                nextButton.classList.remove('hidden');
+            } else {
+                feedbackContainer.innerHTML = `
+                    <div class="incorrect">Incorrect. Try again!</div>
+                    <button class="retry-button">Try Again</button>
+                `;
+                
+                const retryButton = feedbackContainer.querySelector('.retry-button');
+                retryButton.onclick = () => this.display(container);
+            }
+        };
     }
 
     evaluate() {
