@@ -127,7 +127,7 @@ function previewComment(author, avatar, text) {
                 <strong class="comment-author">${author}</strong>
             </div>
             <div class="comment-content">
-                <div class="comment-text">${marked(text, { breaks: true })}</div>
+                <div class="comment-text">${marked.parse(text, { breaks: true })}</div>
             </div>
         </div>
     `;
