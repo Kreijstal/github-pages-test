@@ -73,11 +73,15 @@ async function startQuiz(quizId) {
             
             if (isCorrect) {
                 feedbackContainer.innerHTML = '<div class="correct">Correct!</div>';
+                nextButton.classList.remove('hidden');
             } else {
                 quiz.showAnswer(feedbackContainer);
+                // Add retry button alongside next button
+                feedbackContainer.innerHTML += `
+                    <button onclick="setupQuestion()" class="retry-button">Try Again</button>
+                `;
+                nextButton.classList.remove('hidden');
             }
-            
-            nextButton.classList.remove('hidden');
         };
     }
     
