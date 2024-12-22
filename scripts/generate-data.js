@@ -21,6 +21,17 @@ async function createZip() {
   
   zip.file("data.json", JSON.stringify(data));
   
+  // Add comments
+  const comments = {
+    comments: [
+      {
+        author: "Author",
+        text: "Hello world"
+      }
+    ]
+  };
+  zip.file("comments.json", JSON.stringify(comments));
+  
   const content = await zip.generateAsync({type: "nodebuffer"});
   fs.writeFileSync('data.zip', content);
 }

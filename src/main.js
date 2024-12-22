@@ -83,11 +83,21 @@ async function loadData() {
         const zip = new JSZip();
         const contents = await zip.loadAsync(zipBlob);
         const dataText = await contents.file("data.json").async("text");
+        const commentsText = await contents.file("comments.json").async("text");
         const data = JSON.parse(dataText);
+        const comments = JSON.parse(commentsText);
         
         // Display data
         const container = document.getElementById('data-container');
         container.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        
+        // Display comments
+        const commentsContainer = document.getElementById('comments-container');
+        commentsContainer.innerHTML = comments.comments.map(comment => `
+            <div class="comment">
+                <strong>${comment.author}:</strong> ${comment.text}
+            </div>
+        `).join('');
     } catch (error) {
         console.error('Error loading data:', error);
     }
