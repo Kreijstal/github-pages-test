@@ -15,10 +15,12 @@ ${text}
 
 export function getCommentsTemplate(personalization = new CommentPersonalizationAPI()) {
     return `
-            <h2 id="comments-header">${personalization.getHeaderText()}</h2>
-            <p id="comments-subheader">${personalization.getSubheaderText()}</p>
-            
-            <div class="comment-form">
+            <button id="toggle-comments" class="comments-toggle">Show Comments</button>
+            <div id="comments-content" class="comments-content hidden">
+                <h2 id="comments-header">${personalization.getHeaderText()}</h2>
+                <p id="comments-subheader">${personalization.getSubheaderText()}</p>
+                
+                <div class="comment-form">
                 <h3>${personalization.getFormTitle()}</h3>
                 <form id="comment-form">
                     <div class="form-group">
@@ -57,8 +59,22 @@ export function getCommentsTemplate(personalization = new CommentPersonalization
                 <pre id="toml-output"></pre>
             </div>
 
-            <div id="comments-container"></div>
+                <div id="comments-container"></div>
+            </div>
     `;
+}
+
+export function setupCommentsToggle() {
+    const toggleButton = document.getElementById('toggle-comments');
+    const commentsContent = document.getElementById('comments-content');
+    
+    if (toggleButton && commentsContent) {
+        toggleButton.onclick = () => {
+            const isHidden = commentsContent.classList.contains('hidden');
+            commentsContent.classList.toggle('hidden');
+            toggleButton.textContent = isHidden ? 'Hide Comments' : 'Show Comments';
+        };
+    }
 }
 
 export async function loadComments(commentsPath, headerText = "Comments", subheaderText = "Share your thoughts below!") {

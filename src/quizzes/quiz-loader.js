@@ -47,16 +47,6 @@ async function startQuiz(quizId) {
     const commentsSection = document.getElementById('comments-section');
     commentsSection.classList.remove('hidden');
     
-    // Set up comments toggle button
-    const toggleButton = document.getElementById('toggle-comments');
-    const commentsContent = document.getElementById('comments-content');
-    
-    toggleButton.onclick = () => {
-        const isHidden = commentsContent.classList.contains('hidden');
-        commentsContent.classList.toggle('hidden');
-        toggleButton.textContent = isHidden ? 'Hide Comments' : 'Show Comments';
-    };
-    
     // Set up the edit URL for comments
     const editUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
     const editLink = document.getElementById('edit-comments-link');
@@ -75,6 +65,7 @@ async function startQuiz(quizId) {
     
     await loadComments(`${quizId}/comments.toml`, quizPersonalization);
     await setupCommentForm();
+    setupCommentsToggle();
     
     // Initial quiz display
     quiz.display(container);
