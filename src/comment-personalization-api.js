@@ -7,7 +7,6 @@ const defaultOptions = {
     previewTitle: "Preview",
     contributionText: "Want to add your own comment? You can contribute by:",
     contributionSteps: [
-        "Editing the comments.toml file",
         "Adding your comment using TOML format with markdown support",
         "Creating a pull request"
     ]
