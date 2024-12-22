@@ -1,4 +1,5 @@
 import { marked } from 'https://esm.sh/marked@11.2.0';
+import { generateTomlSnippet, setupCommentForm } from '../comment-utils.js';
 import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
 
 // Import all available quizzes
@@ -67,8 +68,9 @@ async function startQuiz(quizId) {
     document.getElementById('quiz-container').classList.remove('hidden');
     document.getElementById('comments-section').classList.remove('hidden');
     
-    // Load comments for this quiz
+    // Load comments for this quiz and setup comment form
     await loadQuizComments(quizId);
+    await setupCommentForm(quizId);
     
     function setupQuestion() {
         feedbackContainer.classList.add('hidden');
