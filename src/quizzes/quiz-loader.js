@@ -35,6 +35,11 @@ async function startQuiz(quizId) {
     const feedbackContainer = document.getElementById('quiz-feedback');
     const nextButton = document.getElementById('next-question');
     
+    // Reset quiz state
+    feedbackContainer.innerHTML = '';
+    feedbackContainer.classList.add('hidden');
+    nextButton.classList.add('hidden');
+    
     // Show quiz container and comments section
     document.getElementById('quiz-container').classList.remove('hidden');
     
