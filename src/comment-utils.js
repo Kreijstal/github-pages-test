@@ -12,8 +12,8 @@ ${text}
 
 export function getCommentsTemplate() {
     return `
-            <h2>How was this quiz?</h2>
-            <p>Let us know your thoughts in the comments below!</p>
+            <h2 id="comments-header"></h2>
+            <p id="comments-subheader"></p>
             
             <div class="comment-form">
                 <h3>Create Your Comment</h3>
@@ -45,7 +45,7 @@ export function getCommentsTemplate() {
             <div class="contribute-info hidden">
                 <p>Want to add your own comment? You can contribute by:</p>
                 <ol>
-                    <li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file for this quiz</li>
+                    <li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file</li>
                     <li>Adding your comment using TOML format with markdown support</li>
                     <li>Creating a pull request</li>
                 </ol>
@@ -56,9 +56,9 @@ export function getCommentsTemplate() {
     `;
 }
 
-export async function loadQuizComments(quizId) {
+export async function loadComments(commentsPath, headerText = "Comments", subheaderText = "Share your thoughts below!") {
     try {
-        const response = await fetch(`${quizId}/comments.toml`);
+        const response = await fetch(commentsPath);
         const tomlText = await response.text();
         const commentsData = TOML.parse(tomlText);
         
@@ -99,7 +99,7 @@ export function previewComment(author, avatar, text, marked) {
     `;
 }
 
-export async function setupCommentForm(quizId) {
+export async function setupCommentForm() {
     const { marked } = await import('https://esm.sh/marked@11.2.0');
     const form = document.getElementById('comment-form');
     const previewBtn = document.getElementById('preview-btn');

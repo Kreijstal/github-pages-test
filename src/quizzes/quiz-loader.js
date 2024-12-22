@@ -50,7 +50,11 @@ async function startQuiz(quizId) {
     }
     
     // Load comments and setup form
-    await loadQuizComments(`${quizId}/comments.toml`);
+    await loadComments(
+        `${quizId}/comments.toml`,
+        "How was this quiz?",
+        "Let us know your thoughts in the comments below!"
+    );
     await setupCommentForm();
     
     function setupQuestion() {
