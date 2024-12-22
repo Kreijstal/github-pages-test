@@ -153,6 +153,7 @@ async function setupCommentForm() {
         }
     });
 
+    // Handle post button click
     generateBtn.addEventListener('click', () => {
         const author = document.getElementById('author').value;
         const avatar = document.getElementById('avatar').value;
