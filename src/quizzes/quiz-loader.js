@@ -1,8 +1,10 @@
 // Import all available quizzes
 import ArithmeticQuiz from './arithmetic.js';
+import TriviaQuiz from './trivia.js';
 
 const AVAILABLE_QUIZZES = {
-    'arithmetic': ArithmeticQuiz
+    'arithmetic': ArithmeticQuiz,
+    'trivia': TriviaQuiz
 };
 
 function loadQuizList() {
