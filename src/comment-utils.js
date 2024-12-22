@@ -63,7 +63,9 @@ export async function loadQuizComments(quizId) {
         const commentsData = TOML.parse(tomlText);
         
         const commentsSection = document.getElementById('comments-section');
-        commentsSection.innerHTML = getCommentsTemplate();
+        if (commentsSection.children.length === 0) {
+            commentsSection.innerHTML = getCommentsTemplate();
+        }
         
         const commentsContainer = document.getElementById('comments-container');
         commentsContainer.innerHTML = commentsData.comments.map(comment => `
