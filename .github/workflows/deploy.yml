@@ -40,13 +40,16 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Create Release and Upload Asset
+      - name: Handle Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Delete existing release if it exists
+          gh release delete latest-data --yes || true
+          
+          # Create new release
           gh release create latest-data data.zip \
             --title "Latest Data Release" \
-            --clobber \
             --prerelease \
             --notes "This release contains generated sample data.\n\nAll assets from this release can be accessed from:\nhttps://github.com/Kreijstal/github-pages-test/releases/download/latest-data/*\n\nFor example, the data.zip file is available at:\nhttps://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip" \
             --latest
