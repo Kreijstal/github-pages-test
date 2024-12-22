@@ -51,7 +51,8 @@ async function startQuiz(quizId) {
     commentsSection.classList.remove('hidden');
     
     // Set up the edit URL for comments
-    currentQuizEditUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
+    const editUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
+    currentQuizEditUrl = editUrl;
     
     // Load comments and setup form
     const quizPersonalization = new CommentPersonalizationAPI({
@@ -60,7 +61,7 @@ async function startQuiz(quizId) {
         formTitle: "Share Your Quiz Experience",
         previewTitle: "Preview Your Comment",
         contributionText: "Want to help improve this quiz? You can contribute by:",
-        editUrl: `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`
+        editUrl: editUrl
     });
     
     await loadComments(`${quizId}/comments.toml`, quizPersonalization);
