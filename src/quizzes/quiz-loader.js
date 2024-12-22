@@ -40,7 +40,8 @@ async function startQuiz(quizId) {
     feedbackContainer.classList.add('hidden');
     nextButton.classList.add('hidden');
     
-    // Show quiz container and comments section
+    // Hide quiz list and show quiz container and comments section
+    document.getElementById('quiz-list').classList.add('hidden');
     document.getElementById('quiz-container').classList.remove('hidden');
     
     // Initialize comments section
