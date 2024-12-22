@@ -18,16 +18,25 @@ body {
     border-radius: 8px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    align-items: start;
 }
 
-.comment strong {
+.comment-header {
+    padding-right: 20px;
+    border-right: 2px solid #e1e4e8;
+}
+
+.comment-author {
     display: inline-block;
     font-size: 1.1em;
     color: #24292e;
     background-color: #f1f8ff;
     padding: 4px 12px;
     border-radius: 15px;
-    margin-bottom: 12px;
+    white-space: nowrap;
 }
 
 .comment-text {
