@@ -1,4 +1,4 @@
-import { generateTomlSnippet, setupCommentForm, loadComments } from '../comment-utils.js';
+import { generateTomlSnippet, setupCommentForm, loadComments, CommentPersonalizationAPI } from '../comment-utils.js';
 
 // Import all available quizzes
 import ArithmeticQuiz from './arithmetic/quiz.js';
