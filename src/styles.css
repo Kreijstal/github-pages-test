@@ -193,6 +193,35 @@ body {
     display: none;
 }
 
+.comments-toggle {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 20px 0;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+.comments-toggle:hover {
+    background-color: #e9ecef;
+}
+
+.comments-content {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.comments-content.hidden {
+    max-height: 0;
+}
+
+.comments-content:not(.hidden) {
+    max-height: 5000px;
+}
+
 #toml-output {
     background-color: #f6f8fa;
     padding: 16px;
