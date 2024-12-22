@@ -83,19 +83,26 @@ export default class TriviaQuiz {
                     }
                 } else {
                     feedbackContainer.innerHTML = `
-                        <div class="answer-explanation">
-                            <p>The correct answer is: ${question.choices[question.correctIndex]}</p>
-                            <p>${question.explanation}</p>
-                        </div>
+                        <div class="incorrect">Incorrect. Try again or click "Show Answer" to see the explanation.</div>
                         <button class="retry-button">Try Again</button>
+                        <button class="show-answer-button">Show Answer</button>
                     `;
                     
                     const retryButton = feedbackContainer.querySelector('.retry-button');
-                    retryButton.onclick = showQuestion;
+                    const showAnswerButton = feedbackContainer.querySelector('.show-answer-button');
                     
-                    if (this.currentQuestionIndex < this.questions.length - 1) {
-                        nextButton.classList.remove('hidden');
-                    }
+                    retryButton.onclick = showQuestion;
+                    showAnswerButton.onclick = () => {
+                        feedbackContainer.innerHTML = `
+                            <div class="answer-explanation">
+                                <p>The correct answer is: ${question.choices[question.correctIndex]}</p>
+                                <p>${question.explanation}</p>
+                            </div>
+                        `;
+                        if (this.currentQuestionIndex < this.questions.length - 1) {
+                            nextButton.classList.remove('hidden');
+                        }
+                    };
                 }
             };
         };
