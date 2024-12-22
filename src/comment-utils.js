@@ -2,6 +2,8 @@ import { marked } from 'https://esm.sh/marked@11.2.0';
 import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
 import { CommentPersonalizationAPI } from './comment-personalization-api.js';
 
+export { CommentPersonalizationAPI };
+
 export function generateTomlSnippet(author, avatar, text) {
     return `[[comments]]
 author = "${author}"
