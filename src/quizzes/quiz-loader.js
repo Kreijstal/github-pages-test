@@ -1,6 +1,9 @@
+import { marked } from 'https://esm.sh/marked@11.2.0';
+import TOML from 'https://esm.sh/@iarna/toml@7.2.0';
+
 // Import all available quizzes
-import ArithmeticQuiz from './arithmetic.js';
-import TriviaQuiz from './trivia.js';
+import ArithmeticQuiz from './arithmetic/arithmetic.js';
+import TriviaQuiz from './trivia/trivia.js';
 
 const AVAILABLE_QUIZZES = {
     'arithmetic': ArithmeticQuiz,
@@ -23,7 +26,36 @@ function loadQuizList() {
     });
 }
 
-function startQuiz(quizId) {
+async function loadQuizComments(quizId) {
+    try {
+        const response = await fetch(`${quizId}/comments.toml`);
+        const tomlText = await response.text();
+        const commentsData = TOML.parse(tomlText);
+        
+        const commentsSection = document.getElementById('comments-section');
+        commentsSection.innerHTML = `
+            <h2>How was this quiz?</h2>
+            <p>Let us know your thoughts in the comments below!</p>
+            <div id="comments-container">
+                ${commentsData.comments.map(comment => `
+                    <div class="comment">
+                        <div class="comment-header">
+                            <img class="comment-avatar" src="${comment.avatar || 'https://secure.gravatar.com/avatar/default?s=164&d=identicon'}" alt="${comment.author}'s avatar">
+                            <strong class="comment-author">${comment.author}</strong>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-text">${marked.parse(comment.text, { breaks: true })}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error loading comments:', error);
+    }
+}
+
+async function startQuiz(quizId) {
     const QuizClass = AVAILABLE_QUIZZES[quizId];
     if (!QuizClass) return;
 
@@ -34,6 +66,9 @@ function startQuiz(quizId) {
     
     document.getElementById('quiz-container').classList.remove('hidden');
     document.getElementById('comments-section').classList.remove('hidden');
+    
+    // Load comments for this quiz
+    await loadQuizComments(quizId);
     
     function setupQuestion() {
         feedbackContainer.classList.add('hidden');
