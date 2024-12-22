@@ -31,6 +31,7 @@ async function createZip() {
   const processedComments = {
     comments: commentsData.comments.map(comment => ({
       author: comment.author,
+      avatar: comment.avatar || `https://secure.gravatar.com/avatar/default?s=164&d=identicon`,
       text: marked(comment.text, { breaks: true })
     }))
   };

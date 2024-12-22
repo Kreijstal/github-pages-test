@@ -96,9 +96,12 @@ async function loadData() {
         commentsContainer.innerHTML = comments.comments.map(comment => `
             <div class="comment">
                 <div class="comment-header">
+                    <img class="comment-avatar" src="${comment.avatar}" alt="${comment.author}'s avatar">
                     <strong class="comment-author">${comment.author}</strong>
                 </div>
-                <div class="comment-text">${comment.text}</div>
+                <div class="comment-content">
+                    <div class="comment-text">${comment.text}</div>
+                </div>
             </div>
         `).join('');
     } catch (error) {

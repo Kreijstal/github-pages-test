@@ -44,7 +44,7 @@ body {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 150px 1fr;
     gap: 20px;
     align-items: start;
 }
@@ -52,16 +52,25 @@ body {
 .comment-header {
     padding-right: 20px;
     border-right: 2px solid #e1e4e8;
+    text-align: center;
+}
+
+.comment-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 .comment-author {
-    display: inline-block;
+    display: block;
     font-size: 1.1em;
     color: #24292e;
     background-color: #f1f8ff;
     padding: 4px 12px;
     border-radius: 15px;
     white-space: nowrap;
+    margin: 0 auto;
 }
 
 .comment-text {
