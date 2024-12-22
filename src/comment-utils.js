@@ -132,10 +132,10 @@ export async function setupCommentForm(quizId) {
             tomlOutput.classList.remove('hidden');
             previewContainer.classList.add('hidden');
             
-            // Update the edit link to point to the correct comments.toml file
+            // Update the edit link if URL was provided
             const editLink = document.getElementById('edit-comments-link');
-            if (editLink) {
-                editLink.href = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
+            if (editLink && editLink.dataset.editUrl) {
+                editLink.href = editLink.dataset.editUrl;
                 editLink.target = '_blank'; // Open in new tab
             }
         }

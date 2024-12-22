@@ -42,9 +42,16 @@ async function startQuiz(quizId) {
     const commentsSection = document.getElementById('comments-section');
     commentsSection.classList.remove('hidden');
     
+    // Set up the edit URL for comments
+    const editUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
+    const editLink = document.getElementById('edit-comments-link');
+    if (editLink) {
+        editLink.dataset.editUrl = editUrl;
+    }
+    
     // Load comments and setup form
-    await loadQuizComments(quizId);
-    await setupCommentForm(quizId);
+    await loadQuizComments(`${quizId}/comments.toml`);
+    await setupCommentForm();
     
     function setupQuestion() {
         feedbackContainer.classList.add('hidden');
