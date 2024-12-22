@@ -44,8 +44,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create data-${{ github.sha }} data.zip \
-            --title "Data Release ${{ github.sha }}" \
+          gh release create latest-data data.zip \
+            --title "Latest Data Release" \
             --notes "Automated data release" \
             --latest
 

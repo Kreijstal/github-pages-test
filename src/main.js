@@ -1,11 +1,7 @@
 async function loadData() {
     try {
-        // Get latest release
-        const response = await fetch('https://api.github.com/repos/Kreijstal/github-pages-test/releases/latest');
-        const release = await response.json();
-        
-        // Get zip file URL
-        const zipUrl = release.assets.find(asset => asset.name === 'data.zip').browser_download_url;
+        // Get data directly from the latest-data release
+        const zipUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
         
         // Download and process zip
         const zipResponse = await fetch(zipUrl);
