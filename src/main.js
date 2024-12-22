@@ -163,6 +163,7 @@ async function setupCommentForm() {
             const toml = generateTomlSnippet(author, avatar, text);
             tomlOutput.textContent = toml;
             document.querySelector('.contribute-info').classList.remove('hidden');
+            tomlOutput.classList.remove('hidden');
             previewContainer.classList.add('hidden');
         }
     });
