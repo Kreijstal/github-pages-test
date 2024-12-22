@@ -13,7 +13,7 @@ const defaultOptions = {
     ]
 };
 
-export class PersonalizationAPI {
+export class CommentPersonalizationAPI {
     constructor(options = {}) {
         this.options = { ...defaultOptions, ...options };
     }

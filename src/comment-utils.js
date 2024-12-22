@@ -1,6 +1,6 @@
 import { marked } from 'https://esm.sh/marked@11.2.0';
 import TOML from 'https://esm.sh/@iarna/toml@2.2.5';
-import { PersonalizationAPI } from './personalization-api.js';
+import { PersonalizationAPI } from './comment-personalization-api.js';
 
 export function generateTomlSnippet(author, avatar, text) {
     return `[[comments]]

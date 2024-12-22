@@ -50,7 +50,7 @@ async function startQuiz(quizId) {
     }
     
     // Load comments and setup form
-    const quizPersonalization = new PersonalizationAPI({
+    const quizPersonalization = new CommentPersonalizationAPI({
         headerText: "How was this quiz?",
         subheaderText: "Let us know your thoughts in the comments below!",
         formTitle: "Share Your Quiz Experience",
