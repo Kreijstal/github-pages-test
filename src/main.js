@@ -61,18 +61,20 @@ async function loadData() {
     try {
         const baseUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
         
+        let zipResponse;
+        
         // First try direct fetch without any proxy
         try {
-            const directResponse = await fetch(baseUrl);
-            if (directResponse.ok) {
-                return directResponse;
+            zipResponse = await fetch(baseUrl);
+            if (!zipResponse.ok) {
+                throw new Error(`Direct fetch failed with status: ${zipResponse.status}`);
             }
         } catch (error) {
             console.warn('Direct fetch failed, trying proxies:', error);
+            // If direct fetch fails, try fetching with fallback proxies
+            zipResponse = await fetchWithFallback(baseUrl);
         }
-
-        // If direct fetch fails, try fetching with fallback proxies
-        const zipResponse = await fetchWithFallback(baseUrl);
+        
         const zipBlob = await zipResponse.blob();
         
         const zip = new JSZip();
