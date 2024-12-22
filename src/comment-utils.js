@@ -74,7 +74,7 @@ export function setupCommentsToggle() {
     }
 }
 
-export async function loadComments(commentsPath, headerText = "Comments", subheaderText = "Share your thoughts below!") {
+export async function loadComments(commentsPath, personalization = new CommentPersonalizationAPI(), editUrl = '') {
     try {
         const response = await fetch(commentsPath);
         const tomlText = await response.text();
@@ -82,7 +82,7 @@ export async function loadComments(commentsPath, headerText = "Comments", subhea
         
         const commentsSection = document.getElementById('comments-section');
         if (commentsSection.children.length === 0) {
-            commentsSection.innerHTML = getCommentsTemplate();
+            commentsSection.innerHTML = getCommentsTemplate(personalization, editUrl);
         }
         
         const commentsContainer = document.getElementById('comments-container');

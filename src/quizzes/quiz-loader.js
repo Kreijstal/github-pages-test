@@ -64,8 +64,8 @@ async function startQuiz(quizId) {
         editUrl: editUrl
     });
     
-    await loadComments(`${quizId}/comments.toml`, quizPersonalization);
-    await setupCommentForm();
+    await loadComments(`${quizId}/comments.toml`, quizPersonalization, editUrl);
+    await setupCommentForm(editUrl);
     setupCommentsToggle();
     
     // Initial quiz display
