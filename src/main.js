@@ -118,7 +118,8 @@ ${text}
 """`;
 }
 
-function previewComment(author, avatar, text) {
+async function previewComment(author, avatar, text) {
+    const { marked } = await import('https://esm.sh/marked@11.2.0');
     const preview = document.getElementById('comment-preview');
     preview.innerHTML = `
         <div class="comment">
@@ -140,13 +141,13 @@ function setupCommentForm() {
     const previewContainer = document.getElementById('preview-container');
     const tomlOutput = document.getElementById('toml-output');
 
-    previewBtn.addEventListener('click', () => {
+    previewBtn.addEventListener('click', async () => {
         const author = document.getElementById('author').value;
         const avatar = document.getElementById('avatar').value;
         const text = document.getElementById('comment-text').value;
 
         if (author && text) {
-            previewComment(author, avatar, text);
+            await previewComment(author, avatar, text);
             previewContainer.classList.remove('hidden');
             tomlOutput.classList.add('hidden');
         }
