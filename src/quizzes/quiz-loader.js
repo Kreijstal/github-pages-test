@@ -1,5 +1,8 @@
 import { generateTomlSnippet, setupCommentForm, loadComments, CommentPersonalizationAPI, setupCommentsToggle } from '../comment-utils.js';
 
+// Global variable to store the current quiz's edit URL
+let currentQuizEditUrl = '';
+
 // Import all available quizzes
 import ArithmeticQuiz from './arithmetic/quiz.js';
 import TriviaQuiz from './trivia/quiz.js';
@@ -49,11 +52,7 @@ async function startQuiz(quizId) {
     commentsSection.classList.remove('hidden');
     
     // Set up the edit URL for comments
-    const editUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
-    const editLink = document.getElementById('edit-comments-link');
-    if (editLink) {
-        editLink.dataset.editUrl = editUrl;
-    }
+    currentQuizEditUrl = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
     
     // Load comments and setup form
     const quizPersonalization = new CommentPersonalizationAPI({

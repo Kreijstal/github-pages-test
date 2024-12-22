@@ -150,10 +150,10 @@ export async function setupCommentForm() {
             tomlOutput.classList.remove('hidden');
             previewContainer.classList.add('hidden');
             
-            // Update the edit link if URL was provided
+            // Update the edit link with the current quiz's edit URL
             const editLink = document.getElementById('edit-comments-link');
-            if (editLink && editLink.dataset.editUrl) {
-                editLink.href = editLink.dataset.editUrl;
+            if (editLink && window.currentQuizEditUrl) {
+                editLink.href = window.currentQuizEditUrl;
                 editLink.target = '_blank'; // Open in new tab
             }
         }
