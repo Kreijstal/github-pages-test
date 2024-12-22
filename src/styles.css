@@ -234,6 +234,15 @@ body {
     color: #dc3545;
 }
 
+.quiz-complete {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border-radius: 4px;
+}
+
 #next-question {
     margin-top: 15px;
     padding: 8px 16px;

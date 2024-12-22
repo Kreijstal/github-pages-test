@@ -73,10 +73,15 @@ export default class TriviaQuiz {
             <div class="answer-explanation">
                 <p>The correct answer is: ${question.choices[question.correctIndex]}</p>
                 <p>${question.explanation}</p>
+                ${this.currentQuestionIndex === this.questions.length - 1 ? 
+                    '<p class="quiz-complete">Congratulations! You\'ve completed the quiz!</p>' : 
+                    ''}
             </div>
         `;
         
-        // Move to next question for next time
-        this.currentQuestionIndex = (this.currentQuestionIndex + 1) % this.questions.length;
+        // Move to next question if not at the end
+        if (this.currentQuestionIndex < this.questions.length - 1) {
+            this.currentQuestionIndex++;
+        }
     }
 }
