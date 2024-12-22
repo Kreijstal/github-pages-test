@@ -35,10 +35,14 @@ async function startQuiz(quizId) {
     const feedbackContainer = document.getElementById('quiz-feedback');
     const nextButton = document.getElementById('next-question');
     
+    // Show quiz container and comments section
     document.getElementById('quiz-container').classList.remove('hidden');
-    document.getElementById('comments-section').classList.remove('hidden');
     
-    // Load comments for this quiz and setup comment form
+    // Initialize comments section
+    const commentsSection = document.getElementById('comments-section');
+    commentsSection.classList.remove('hidden');
+    
+    // Load comments and setup form
     await loadQuizComments(quizId);
     await setupCommentForm(quizId);
     
