@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Quizzes</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script type="module" src="quiz-loader.js"></script>
+</head>
+<body>
+    <h1>Interactive Quizzes</h1>
+    
+    <!-- List of available quizzes -->
+    <div id="quiz-list"></div>
+
+    <!-- Active quiz container -->
+    <div id="quiz-container" class="hidden">
+        <div id="quiz-content"></div>
+        <div id="quiz-feedback" class="hidden"></div>
+        <button id="next-question" class="hidden">Next Question</button>
+    </div>
+
+    <div id="comments-section" class="hidden">
+        <h2>How was this quiz?</h2>
+        <p>Let us know your thoughts in the comments below!</p>
+        <!-- Comments section will be populated by main.js -->
+    </div>
+</body>
+</html>
