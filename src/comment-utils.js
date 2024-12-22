@@ -45,7 +45,7 @@ export function getCommentsTemplate() {
             <div class="contribute-info hidden">
                 <p>Want to add your own comment? You can contribute by:</p>
                 <ol>
-                    <li>Editing the comments.toml file for this quiz</li>
+                    <li>Editing the <a href="" id="edit-comments-link">comments.toml</a> file for this quiz</li>
                     <li>Adding your comment using TOML format with markdown support</li>
                     <li>Creating a pull request</li>
                 </ol>
@@ -133,9 +133,10 @@ export async function setupCommentForm(quizId) {
             previewContainer.classList.add('hidden');
             
             // Update the edit link to point to the correct comments.toml file
-            const editLink = document.querySelector('.contribute-info a');
+            const editLink = document.getElementById('edit-comments-link');
             if (editLink) {
                 editLink.href = `https://github.com/Kreijstal/github-pages-test/edit/master/src/quizzes/${quizId}/comments.toml`;
+                editLink.target = '_blank'; // Open in new tab
             }
         }
     });
