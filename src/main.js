@@ -1,7 +1,7 @@
 async function loadData() {
     try {
         // Get latest release
-        const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/releases/latest');
+        const response = await fetch('https://api.github.com/repos/Kreijstal/github-pages-test/releases/latest');
         const release = await response.json();
         
         // Get zip file URL
