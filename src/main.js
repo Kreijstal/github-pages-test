@@ -54,7 +54,10 @@ async function fetchWithFallback(url) {
             continue;
         }
     }
-    throw new Error(`All proxies failed. Last error: ${lastError}`);
+    const errorMsg = `All proxies failed. Last error: ${lastError}\n\n` +
+        'If you continue having CORS issues, try installing the CORS Unblock addon:\n' +
+        'https://addons.mozilla.org/en-US/firefox/addon/cors-unblock/';
+    throw new Error(errorMsg);
 }
 
 async function loadData() {
