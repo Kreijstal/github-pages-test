@@ -13,7 +13,7 @@ ${text}
 """`;
 }
 
-export function getCommentsTemplate(personalization = new CommentPersonalizationAPI()) {
+export function getCommentsTemplate(personalization = new CommentPersonalizationAPI(), editUrl = '') {
     return `
             <button id="toggle-comments" class="comments-toggle">Show Comments</button>
             <div id="comments-content" class="comments-content hidden">
@@ -50,7 +50,7 @@ export function getCommentsTemplate(personalization = new CommentPersonalization
             <div class="contribute-info hidden">
                 <p>${personalization.getContributionText()}</p>
                 <ol>
-                    <li>Editing the <a href="${window.currentQuizEditUrl || personalization.getEditUrl()}" target="_blank" id="edit-comments-link">comments.toml</a> file</li>
+                    <li>Editing the <a href="${editUrl || personalization.getEditUrl()}" target="_blank" id="edit-comments-link">comments.toml</a> file</li>
                     ${personalization.getContributionSteps().map((step, index) => `<li>${step}</li>`).join('\n                    ')}
                 </ol>
                 <pre id="toml-output"></pre>
@@ -117,7 +117,7 @@ export function previewComment(author, avatar, text, marked) {
     `;
 }
 
-export async function setupCommentForm() {
+export async function setupCommentForm(editUrl = '') {
     const { marked } = await import('https://esm.sh/marked@11.2.0');
     const form = document.getElementById('comment-form');
     const previewBtn = document.getElementById('preview-btn');
@@ -150,11 +150,10 @@ export async function setupCommentForm() {
             tomlOutput.classList.remove('hidden');
             previewContainer.classList.add('hidden');
             
-            // Update the edit link with the current quiz's edit URL
+            // Update the edit link URL if provided
             const editLink = document.getElementById('edit-comments-link');
-            if (editLink && window.currentQuizEditUrl) {
-                editLink.href = window.currentQuizEditUrl;
-                editLink.target = '_blank'; // Open in new tab
+            if (editLink && editUrl) {
+                editLink.href = editUrl;
             }
         }
     });
