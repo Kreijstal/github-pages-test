@@ -33,7 +33,7 @@ This project demonstrates a static website that dynamically loads data from GitH
 
 ## How It Works
 
-- GitHub Actions workflow triggers on push to main branch
+- GitHub Actions workflow triggers on push to master branch
 - Generates sample data and creates a zip file
 - Creates a new GitHub release with the data
 - Deploys the static site to GitHub Pages
