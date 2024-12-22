@@ -1,0 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#data-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+}

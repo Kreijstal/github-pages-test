@@ -1,0 +1,11 @@
+{
+  "name": "static-site-with-binary-data",
+  "version": "1.0.0",
+  "scripts": {
+    "generate": "node scripts/generate-data.js",
+    "build": "mkdir -p dist && cp -r src/* dist/"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}
