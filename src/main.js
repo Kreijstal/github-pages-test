@@ -1,22 +1,39 @@
 async function fetchWithFallback(url) {
-    const corsProxies = [
-        'https://api.cors.lol/?url=',
-        'https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl='
+    const proxyConfigs = [
+        {
+            url: 'https://api.cors.lol/?url=',
+            transform: (url) => `https://api.cors.lol/?url=${encodeURIComponent(url)}`,
+            options: {}
+        },
+        {
+            url: 'https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl=',
+            transform: (url) => `https://bands-proxy.cloudandsoda.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`,
+            options: {}
+        },
+        {
+            url: 'https://cors-proxy.fringe.zone/',
+            transform: (url) => `https://cors-proxy.fringe.zone/${url}`,
+            options: {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }
+        }
     ];
     
     // Shuffle the array of proxies
-    const shuffledProxies = [...corsProxies].sort(() => Math.random() - 0.5);
+    const shuffledProxies = [...proxyConfigs].sort(() => Math.random() - 0.5);
     
     let lastError;
     for (const proxy of shuffledProxies) {
         try {
-            const response = await fetch(proxy + encodeURIComponent(url));
+            const response = await fetch(proxy.transform(url), proxy.options);
             if (response.ok) {
                 return response;
             }
         } catch (error) {
             lastError = error;
-            console.warn(`Proxy ${proxy} failed:`, error);
+            console.warn(`Proxy ${proxy.url} failed:`, error);
             continue;
         }
     }
