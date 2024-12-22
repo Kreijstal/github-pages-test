@@ -71,5 +71,19 @@ async function startQuiz(quizId) {
     quiz.display(container);
 }
 
+function setupQuizListToggle() {
+    const toggleButton = document.getElementById('quiz-list-toggle');
+    const quizList = document.getElementById('quiz-list');
+    
+    toggleButton.onclick = () => {
+        const isHidden = quizList.classList.contains('hidden');
+        quizList.classList.toggle('hidden');
+        toggleButton.textContent = isHidden ? 'Hide Available Quizzes' : 'Show Available Quizzes';
+    };
+}
+
 window.startQuiz = startQuiz;
-window.onload = loadQuizList;
+window.onload = () => {
+    loadQuizList();
+    setupQuizListToggle();
+};

@@ -230,6 +230,35 @@ body {
 }
 /* Add to existing styles.css */
 
+#quiz-list-toggle {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 20px 0;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+#quiz-list-toggle:hover {
+    background-color: #e9ecef;
+}
+
+#quiz-list {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+#quiz-list.hidden {
+    max-height: 0;
+}
+
+#quiz-list:not(.hidden) {
+    max-height: 2000px;
+}
+
 .quiz-item {
     background-color: #f8f9fa;
     border: 1px solid #e1e4e8;
