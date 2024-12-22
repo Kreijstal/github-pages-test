@@ -61,7 +61,17 @@ async function loadData() {
     try {
         const baseUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
         
-        // Try fetching with fallback proxies
+        // First try direct fetch without any proxy
+        try {
+            const directResponse = await fetch(baseUrl);
+            if (directResponse.ok) {
+                return directResponse;
+            }
+        } catch (error) {
+            console.warn('Direct fetch failed, trying proxies:', error);
+        }
+
+        // If direct fetch fails, try fetching with fallback proxies
         const zipResponse = await fetchWithFallback(baseUrl);
         const zipBlob = await zipResponse.blob();
         
