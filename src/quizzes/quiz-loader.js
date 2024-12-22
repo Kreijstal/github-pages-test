@@ -19,7 +19,7 @@ function loadQuizList() {
         element.innerHTML = `
             <h2>${quiz.name}</h2>
             <p>${quiz.description}</p>
-            <button onclick="startQuiz('${id}')">Start Quiz</button>
+            <a href="#${id}" onclick="startQuiz('${id}'); return false;" class="button">Start Quiz</a>
         `;
         container.appendChild(element);
     });
