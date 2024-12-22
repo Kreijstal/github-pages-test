@@ -161,7 +161,7 @@ function setupCommentForm() {
         if (author && text) {
             const toml = generateTomlSnippet(author, avatar, text);
             tomlOutput.textContent = toml;
-            tomlOutput.classList.remove('hidden');
+            document.querySelector('.contribute-info').classList.remove('hidden');
             previewContainer.classList.add('hidden');
         }
     });
