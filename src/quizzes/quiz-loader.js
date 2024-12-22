@@ -73,14 +73,20 @@ async function startQuiz(quizId) {
             
             if (isCorrect) {
                 feedbackContainer.innerHTML = '<div class="correct">Correct!</div>';
-                nextButton.classList.remove('hidden');
+                if (quiz.moveToNextQuestion()) {
+                    nextButton.classList.remove('hidden');
+                } else {
+                    feedbackContainer.innerHTML += '<p class="quiz-complete">Congratulations! You\'ve completed the quiz!</p>';
+                }
             } else {
                 quiz.showAnswer(feedbackContainer);
                 // Add retry button alongside next button
                 feedbackContainer.innerHTML += `
                     <button onclick="setupQuestion()" class="retry-button">Try Again</button>
                 `;
-                nextButton.classList.remove('hidden');
+                if (quiz.moveToNextQuestion()) {
+                    nextButton.classList.remove('hidden');
+                }
             }
         };
     }

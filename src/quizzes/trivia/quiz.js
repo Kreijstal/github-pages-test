@@ -78,10 +78,14 @@ export default class TriviaQuiz {
                     ''}
             </div>
         `;
-        
+    }
+
+    moveToNextQuestion() {
         // Move to next question if not at the end
         if (this.currentQuestionIndex < this.questions.length - 1) {
             this.currentQuestionIndex++;
+            return true;
         }
+        return false;
     }
 }
