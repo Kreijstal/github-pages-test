@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0255b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Static Site with Dynamic Data Loading</h1>
+        <p>A demonstration of dynamic data loading from GitHub releases in a static site</p>
+    </div>
+
+    <div class="links">
+        <a href="src/index.html" class="button">View Demo</a>
+        <a href="https://github.com/Kreijstal/github-pages-test" class="button">View on GitHub</a>
+    </div>
+
+    <h2>About</h2>
+    <p>This project showcases how to build a static website that can load dynamic data from GitHub releases. The site is automatically deployed using GitHub Actions, which also generates and publishes new data releases.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Static site hosted on GitHub Pages</li>
+        <li>Dynamic data loading from GitHub releases</li>
+        <li>Automated data generation and deployment pipeline</li>
+        <li>Sample data generation with 1000 random entries</li>
+    </ul>
+</body>
+</html>
