@@ -19,6 +19,18 @@ async function fetchWithFallback(url) {
         // AllOrigins proxy
         async (url) => {
             return fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
+        },
+        // WhateverOrigin proxy (returns JSON with contents property)
+        async (url) => {
+            const response = await fetch(`https://www.whateverorigin.org/get?url=${encodeURIComponent(url)}`);
+            const data = await response.json();
+            // Create a new response with the contents
+            return new Response(data.contents, {
+                status: 200,
+                headers: new Headers({
+                    'Content-Type': response.headers.get('Content-Type') || 'application/octet-stream'
+                })
+            });
         }
     ];
     
