@@ -1,10 +1,15 @@
 async function loadData() {
     try {
-        // Get data directly from the latest-data release
-        const zipUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
+        // Get data using CORS proxy
+        const baseUrl = 'https://github.com/Kreijstal/github-pages-test/releases/download/latest-data/data.zip';
+        const corsProxyUrl = 'https://api.cors.lol/?url=';
+        const zipUrl = corsProxyUrl + encodeURIComponent(baseUrl);
         
         // Download and process zip
         const zipResponse = await fetch(zipUrl);
+        if (!zipResponse.ok) {
+            throw new Error(`HTTP error! status: ${zipResponse.status}`);
+        }
         const zipBlob = await zipResponse.blob();
         
         const zip = new JSZip();
