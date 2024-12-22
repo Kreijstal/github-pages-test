@@ -50,7 +50,7 @@ export function getCommentsTemplate(personalization = new CommentPersonalization
             <div class="contribute-info hidden">
                 <p>${personalization.getContributionText()}</p>
                 <ol>
-                    <li>Editing the <a href="${personalization.getEditUrl()}" target="_blank" id="edit-comments-link">comments.toml</a> file</li>
+                    <li>Editing the <a href="${window.currentQuizEditUrl || personalization.getEditUrl()}" target="_blank" id="edit-comments-link">comments.toml</a> file</li>
                     ${personalization.getContributionSteps().map((step, index) => `<li>${step}</li>`).join('\n                    ')}
                 </ol>
                 <pre id="toml-output"></pre>
