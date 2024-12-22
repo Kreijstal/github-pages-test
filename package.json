@@ -1,6 +1,10 @@
 {
   "name": "static-site-with-binary-data",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kreijstal/github-pages-test.git"
+  },
   "scripts": {
     "generate": "node scripts/generate-data.js",
     "build": "mkdir -p dist && cp -r src/* dist/"
